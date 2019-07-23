@@ -1,0 +1,14 @@
+<div class="bmdb-list">
+  <ul class="bmdb-ul"></ul>
+</div>
+<div class="bmdb-loader">
+  <ul class="bmdb-ul">
+    {{each skeletons}}
+      <li class="bmdb-li">
+        <div class="bmdb-cover"></div>
+        <div class="bmdb-title"></div>
+        <div class="bmdb-rank"></div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

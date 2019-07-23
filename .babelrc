@@ -1,0 +1,24 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 15 versions", "safari >= 4", "not ie < 9", "iOS >= 7"]
+        },
+        "loose": true
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": false,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": true
+      }
+    ]
+  ]
+}
