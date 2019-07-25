@@ -14,9 +14,9 @@
 
 ```html
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.0.0/dist/Bmdb.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.1.0/dist/Bmdb.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.0.0/dist/Bmdb.min.js" />
+  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.1.0/dist/Bmdb.min.js" />
 </head>
 ```
 
@@ -29,6 +29,7 @@
 | secret | 是   | string | API 密钥 |
 | skeletonNum  | 否   | number | 骨架屏数量 |
 | noMoreText |  否   | string | 加载完毕提示语 |
+| cache |  否   | boolean | 是否缓存第一页数据 |
 | limit  | 否   | number | 每页条数 |
 
 ```javascript
