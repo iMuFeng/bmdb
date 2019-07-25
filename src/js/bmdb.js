@@ -83,7 +83,7 @@ class Bmdb {
     data = data.map(item => {
       const halfRating = Math.round(item.rating / 2)
 
-      item.url = `${config.DB_BASE_URL}${item.doubanId}`
+      item.doubanUrl = `${config.DB_BASE_URL}${item.doubanId}`
       item.stars = Array.from({ length: 5 }).map((_, index) => index + 1 <= halfRating)
       item.rating = item.rating.includes('.') ? item.rating : `${item.rating}.0`
 
