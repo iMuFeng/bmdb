@@ -15,7 +15,7 @@ class Bmdb {
     this.secret = secret
     this.limit = limit || 30
     this.isLoading = false
-    this.cache = cache || true
+    this.cache = cache !== undefined ? cache : true
     this.cacheKey = `bmdb_${type}`.toUpperCase()
 
     this.$container = $(selector)
