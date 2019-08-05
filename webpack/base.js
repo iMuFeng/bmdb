@@ -62,19 +62,17 @@ function baseConfig (mode) {
         },
         {
           test: /\.scss$/,
-          use: [isDev ? 'css-hot-loader' : null]
-            .filter(item => item !== null)
-            .concat([
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: {
-                  sourceMap: true
-                }
-              },
-              'postcss-loader',
-              'sass-loader'
-            ])
+          use: [
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            'postcss-loader',
+            'sass-loader'
+          ]
         },
         {
           test: /\.html$/,

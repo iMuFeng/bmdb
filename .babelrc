@@ -4,7 +4,7 @@
       "@babel/preset-env", {
         "modules": false,
         "targets": {
-          "browsers": ["last 15 versions", "safari >= 4", "not ie < 9", "iOS >= 7"]
+          "browsers": ["last 15 versions", "safari >= 10", "not ie < 9", "iOS >= 10"]
         },
         "loose": true
       }
