@@ -1,0 +1,7 @@
+{{each categories}}
+  <li>
+    <a {{if $value.active}}class="bmdb-category-active"{{/if}} href="{{ $value.url }}" title="{{ $value.name }}">
+      {{ $value.name }}
+    </a>
+  </li>
+{{/each}}

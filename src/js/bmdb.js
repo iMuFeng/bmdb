@@ -1,12 +1,17 @@
 import $ from 'jQuery'
 import debounce from 'lodash/debounce'
 
+import store from './store'
 import config from './config'
+import urlParam from './urlParam'
+
+import pluginCategory from './plugins/category'
+
 import containerTpl from '@/template/container.art'
 import listTpl from '@/template/list.art'
 
-class Bmdb {
-  constructor ({ type, selector, secret, limit, skeletonNum, noMoreText, cache }) {
+export default class Bmdb {
+  constructor ({ type, selector, secret, limit, showCategories, categoryFilters, skeletonNum, noMoreText, cache }) {
     this.apiUrl = `${config.API_BASE_URL}${type || 'movies'}`
     this.noMoreText = noMoreText || ''
     this.skeletonNum = skeletonNum || 5
@@ -15,13 +20,22 @@ class Bmdb {
     this.secret = secret
     this.limit = limit || 30
     this.isLoading = false
-    this.cache = cache !== undefined ? cache : true
+
+    this.category = undefined
+    this.categoryFilters = categoryFilters || []
+    this.showCategories = type === 'movies' ? !!showCategories : false
+
+    this.cache = cache !== undefined ? !!cache : true
     this.cacheKey = `bmdb_${type}`.toUpperCase()
+
+    this.store = store
+    this.urlParam = urlParam
 
     this.$container = $(selector)
     this.$window = $(window)
 
     this.setViews()
+    this.addPlugin(pluginCategory)
     this.getData()
     this.bindScrollEvent()
   }
@@ -58,17 +72,23 @@ class Bmdb {
     const loadCache = this.cache && this.page === 1
 
     if (loadCache) {
-      const data = this.getCache()
+      const data = this.store.get(this.cacheKey)
       this.render(data)
+    }
+
+    const requestData = {
+      page: this.page,
+      limit: this.limit,
+      secret: this.secret
+    }
+
+    if (this.category) {
+      requestData.category = this.category
     }
 
     $.ajax({
       url: this.apiUrl,
-      data: {
-        page: this.page,
-        secret: this.secret,
-        limit: this.limit
-      },
+      data: requestData,
       dataType: 'json'
     }).then(data => {
       if (data.length < this.limit) {
@@ -78,7 +98,7 @@ class Bmdb {
 
       if (loadCache) {
         this.$list.html('')
-        this.setCache(data)
+        this.store.set(this.cacheKey, data)
       }
 
       this.render(data)
@@ -89,30 +109,6 @@ class Bmdb {
       this.isLoading = false
       console.error('[BMDB]', err)
     })
-  }
-
-  getCache () {
-    try {
-      const dataString = window.localStorage.getItem(this.cacheKey)
-
-      if (dataString) {
-        const data = JSON.parse(dataString)
-
-        if (Array.isArray(data)) {
-          return data
-        }
-      }
-    } catch (_) {
-    }
-
-    return []
-  }
-
-  setCache (data) {
-    try {
-      window.localStorage.setItem(this.cacheKey, JSON.stringify(data))
-    } catch (_) {
-    }
   }
 
   render (data) {
@@ -140,6 +136,8 @@ class Bmdb {
   offScrollEvent () {
     this.$window.off('scroll', this.scrollFn)
   }
-}
 
-export default Bmdb
+  addPlugin (plugin) {
+    plugin(this)
+  }
+}
