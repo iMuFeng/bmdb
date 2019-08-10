@@ -26,7 +26,8 @@ export default class Bmdb {
     this.showCategories = type === 'movies' ? !!showCategories : false
 
     this.cache = cache !== undefined ? !!cache : true
-    this.cacheKey = `bmdb_${type}`.toUpperCase()
+    this.namespace = `bmdb_${type}`.toUpperCase()
+    this.cacheKey = null
 
     this.store = store
     this.urlParam = urlParam
@@ -72,6 +73,7 @@ export default class Bmdb {
     const loadCache = this.cache && this.page === 1
 
     if (loadCache) {
+      this.cacheKey = this.category ? this.namespace + ':' + this.category : this.namespace
       const data = this.store.get(this.cacheKey)
       this.render(data)
     }

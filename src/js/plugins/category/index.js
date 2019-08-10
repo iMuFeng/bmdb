@@ -13,7 +13,7 @@ class PluginCategory {
     }
 
     this.apiUrl = `${this.app.apiUrl}/categories`
-    this.cacheKey = `${this.app.cacheKey}_categories`.toUpperCase()
+    this.cacheKey = `${this.app.namespace}_categories`.toUpperCase()
 
     // Parse url category
     this.location = this.parseLocation()
