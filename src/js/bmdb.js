@@ -11,7 +11,7 @@ import containerTpl from '@/template/container.art'
 import listTpl from '@/template/list.art'
 
 export default class Bmdb {
-  constructor ({ type, selector, secret, limit, showCategories, categoryFilters, skeletonNum, noMoreText, cache }) {
+  constructor ({ type, selector, secret, limit, showCategories, categoryFilters, skeletonNum, noMoreText, cache, darkMode }) {
     this.apiUrl = `${config.API_BASE_URL}${type || 'movies'}`
     this.noMoreText = noMoreText || ''
     this.skeletonNum = skeletonNum || 5
@@ -29,6 +29,8 @@ export default class Bmdb {
     this.namespace = `bmdb_${type}`.toUpperCase()
     this.cacheKey = null
 
+    this.darkMode = darkMode !== undefined ? !!darkMode : true
+
     this.store = store
     this.urlParam = urlParam
 
@@ -43,8 +45,13 @@ export default class Bmdb {
 
   setViews () {
     this.$container.append(containerTpl({
+      darkMode: this.darkMode,
       skeletons: Array.from({ length: this.skeletonNum })
     }))
+
+    if (this.darkMode) {
+      this.$container.addClass('bmdb-dark-mode')
+    }
 
     this.$list = this.$container.find('.bmdb-list .bmdb-ul')
     this.$loader = this.$container.find('.bmdb-loader')

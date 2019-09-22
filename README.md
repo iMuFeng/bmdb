@@ -14,9 +14,9 @@
 
 ```html
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.2.1/dist/Bmdb.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.2.1/dist/Bmdb.min.js" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.3.0/dist/Bmdb.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.3.0/dist/Bmdb.min.js" />
 </head>
 ```
 
@@ -32,6 +32,7 @@
 | categoryFilters | 否 | string[] | [] | 展示的分类名称，默认展示所有分类 |
 | noMoreText |  否   | string | 无 | 所有数据加载完成提示语 |
 | cache |  否   | boolean | true | 是否缓存第一页数据 |
+| darkMode |  否   | boolean | true | 是否兼容[深色模式](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) |
 | limit  | 否   | number | 30 | 每页条数 |
 
 ```javascript

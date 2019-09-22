@@ -29,11 +29,17 @@
         margin-right: 15px;
       }
     }
+
+    @media (prefers-color-scheme: dark) {
+      html {
+        background-color: #555;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container"></div>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
 </body>
 <script>
   new Bmdb({
