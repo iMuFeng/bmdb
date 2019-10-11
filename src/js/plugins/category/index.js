@@ -70,7 +70,7 @@ class PluginCategory {
     this.$list.append(categoryTpl({
       categories: [
         all,
-        ...(isBlank(this.app.categoryFilters) ? categories : categories.filter(name => this.app.categoryFilters.includes(name)))
+        ...(isBlank(this.app.categoryFilters) ? categories : this.app.categoryFilters.filter(name => categories.includes(name)))
           .map(name => {
             const url = this.getCategoryUrl(name)
             const active = name === this.app.category
