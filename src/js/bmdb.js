@@ -98,25 +98,27 @@ export default class Bmdb {
     $.ajax({
       url: this.apiUrl,
       data: requestData,
-      dataType: 'json'
-    }).then(data => {
-      if (data.length < this.limit) {
-        this.setNoMoreDataView()
-        this.offScrollEvent()
+      dataType: 'json',
+      success: (data) => {
+        if (data.length < this.limit) {
+          this.setNoMoreDataView()
+          this.offScrollEvent()
+        }
+
+        if (loadCache) {
+          this.$list.html('')
+          this.store.set(this.cacheKey, data)
+        }
+
+        this.render(data)
+
+        this.page += 1
+        this.isLoading = false
+      },
+      error: (err) => {
+        this.isLoading = false
+        console.error('[BMDB]', err)
       }
-
-      if (loadCache) {
-        this.$list.html('')
-        this.store.set(this.cacheKey, data)
-      }
-
-      this.render(data)
-
-      this.page += 1
-      this.isLoading = false
-    }).catch(err => {
-      this.isLoading = false
-      console.error('[BMDB]', err)
     })
   }
 

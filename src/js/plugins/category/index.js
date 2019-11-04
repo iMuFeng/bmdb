@@ -48,15 +48,16 @@ class PluginCategory {
       data: {
         secret: this.app.secret
       },
-      dataType: 'json'
-    }).then(data => {
-      if (loadCache) {
-        this.app.store.set(this.cacheKey, data)
+      dataType: 'json',
+      success: (data) => {
+        if (loadCache) {
+          this.app.store.set(this.cacheKey, data)
+        }
+        this.render(data)
+      },
+      error: (err) => {
+        console.error('[BMDB]', err)
       }
-
-      this.render(data)
-    }).catch(err => {
-      console.error('[BMDB]', err)
     })
   }
 
