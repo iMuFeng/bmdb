@@ -1,6 +1,7 @@
 import $ from 'jQuery'
 import isBlank from 'is-blank'
 
+import config from '../../config'
 import containerTpl from './template/container.art'
 import categoryTpl from './template/category.art'
 
@@ -62,15 +63,25 @@ class PluginCategory {
   }
 
   render (categories) {
-    const all = {
-      name: '全部',
-      url: this.getCategoryUrl(''),
-      active: isBlank(this.app.category)
+    const defaultCategories = [
+      {
+        name: '全部',
+        url: this.getCategoryUrl(''),
+        active: isBlank(this.app.category)
+      }
+    ]
+
+    if (this.app.showStarred) {
+      defaultCategories.push({
+        name: '推荐',
+        url: this.getCategoryUrl(config.STARRED),
+        active: this.app.category === config.STARRED
+      })
     }
 
     this.$list.append(categoryTpl({
       categories: [
-        all,
+        ...defaultCategories,
         ...(isBlank(this.app.categoryFilters) ? categories : this.app.categoryFilters.filter(name => categories.includes(name)))
           .map(name => {
             const url = this.getCategoryUrl(name)

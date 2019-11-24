@@ -14,9 +14,9 @@
 
 ```html
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.3.2/dist/Bmdb.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.4.0/dist/Bmdb.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.3.2/dist/Bmdb.min.js" />
+  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.4.0/dist/Bmdb.min.js" />
 </head>
 ```
 
@@ -30,6 +30,7 @@
 | skeletonNum  | 否   | number | 5 | 骨架屏数量 |
 | showCategories | 否 | boolean | false | 是否显示分类列表，仅 `movies` 有效 |
 | categoryFilters | 否 | string[] | [] | 展示的分类名称，默认展示所有分类 |
+| showStarred | 否 | boolean | true | 是否展示推荐列表 |
 | noMoreText |  否   | string | 无 | 所有数据加载完成提示语 |
 | cache |  否   | boolean | true | 是否缓存第一页数据 |
 | darkMode |  否   | boolean | true | 是否兼容[深色模式](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) |

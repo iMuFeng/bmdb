@@ -11,7 +11,19 @@ import containerTpl from '@/template/container.art'
 import listTpl from '@/template/list.art'
 
 export default class Bmdb {
-  constructor ({ type, selector, secret, limit, showCategories, categoryFilters, skeletonNum, noMoreText, cache, darkMode }) {
+  constructor ({
+    type,
+    selector,
+    secret,
+    limit,
+    showCategories,
+    showStarred,
+    categoryFilters,
+    skeletonNum,
+    noMoreText,
+    cache,
+    darkMode
+  }) {
     this.apiUrl = `${config.API_BASE_URL}${type || 'movies'}`
     this.noMoreText = noMoreText || ''
     this.skeletonNum = skeletonNum || 5
@@ -22,6 +34,7 @@ export default class Bmdb {
     this.isLoading = false
 
     this.category = undefined
+    this.showStarred = showStarred !== undefined ? !!showStarred : true
     this.categoryFilters = categoryFilters || []
     this.showCategories = type === 'movies' ? !!showCategories : false
 
@@ -92,7 +105,11 @@ export default class Bmdb {
     }
 
     if (this.category) {
-      requestData.category = this.category
+      if (this.category === config.STARRED) {
+        requestData.starred = true
+      } else {
+        requestData.category = this.category
+      }
     }
 
     $.ajax({
