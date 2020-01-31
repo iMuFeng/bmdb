@@ -1,4 +1,5 @@
 import $ from 'jQuery'
+import 'lazyload'
 import debounce from 'lodash/debounce'
 
 import store from './store'
@@ -151,9 +152,12 @@ export default class Bmdb {
         return item
       })
 
-      this.$list.append(listTpl({
-        data
-      }))
+      const $data = $(listTpl({ data }))
+
+      this.$list.append($data)
+      $data.find('img.bmdb-cover-image').lazyload({
+        src: 'data-cover'
+      })
     }
   }
 
