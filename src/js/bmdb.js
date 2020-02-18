@@ -25,7 +25,9 @@ export default class Bmdb {
     cache,
     darkMode
   }) {
-    this.apiUrl = `${config.API_BASE_URL}${type || 'movies'}`
+    this.isMovieRequest = type === 'movies'
+    this.type = this.isMovieRequest ? 'movies' : 'books'
+    this.apiUrl = config.API_BASE_URL + this.type
     this.noMoreText = noMoreText || ''
     this.skeletonNum = skeletonNum || 5
 
@@ -37,10 +39,10 @@ export default class Bmdb {
     this.category = undefined
     this.showStarred = showStarred !== undefined ? !!showStarred : true
     this.categoryFilters = categoryFilters || []
-    this.showCategories = type === 'movies' ? !!showCategories : false
+    this.showCategories = this.isMovieRequest ? !!showCategories : false
 
     this.cache = cache !== undefined ? !!cache : true
-    this.namespace = `bmdb_${type}`.toUpperCase()
+    this.namespace = `bmdb_${this.type}`.toUpperCase()
     this.cacheKey = null
 
     this.darkMode = darkMode !== undefined ? !!darkMode : true
@@ -142,10 +144,12 @@ export default class Bmdb {
 
   render (data) {
     if (data.length > 0) {
+      const baseUrl = this.isMovieRequest ? config.MOVIE_BASE_URL : config.BOOK_BASE_URL
+
       data = data.map(item => {
         const halfRating = Math.round(item.rating / 2)
 
-        item.doubanUrl = `${config.DB_BASE_URL}${item.doubanId}`
+        item.doubanUrl = baseUrl + item.doubanId
         item.stars = Array.from({ length: 5 }).map((_, index) => index + 1 <= halfRating)
         item.rating = item.rating.includes('.') ? item.rating : `${item.rating}.0`
 
