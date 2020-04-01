@@ -6,7 +6,7 @@
 
 ```html
 <head>
-  <meta name="referrer" content="never">
+  <meta name="referrer" content="same-origin">
 </head>
 ```
 
@@ -14,9 +14,9 @@
 
 ```html
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.6.1/dist/Bmdb.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.7.0/dist/Bmdb.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.6.1/dist/Bmdb.min.js" />
+  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@1.7.0/dist/Bmdb.min.js" />
 </head>
 ```
 

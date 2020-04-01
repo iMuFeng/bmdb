@@ -42,19 +42,27 @@ function baseConfig (mode) {
       rules: [
         {
           test: /\.js$/,
-          loader: 'eslint-loader',
+          use: [
+            'thread-loader',
+            {
+              loader: 'eslint-loader',
+              options: {
+                formatter: require('eslint-friendly-formatter'),
+                emitWarning: false
+              }
+            }
+          ],
           enforce: 'pre',
           include: [
             resPath('src')
-          ],
-          options: {
-            formatter: require('eslint-friendly-formatter'),
-            emitWarning: false
-          }
+          ]
         },
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          use: [
+            'thread-loader',
+            'babel-loader'
+          ],
           include: [
             resPath('src'),
             resPath('node_modules/webpack-dev-server/client')
@@ -64,6 +72,7 @@ function baseConfig (mode) {
           test: /\.scss$/,
           use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'thread-loader',
             {
               loader: 'css-loader',
               options: {
@@ -76,14 +85,22 @@ function baseConfig (mode) {
         },
         {
           test: /\.html$/,
-          loader: 'html-loader'
+          use: [
+            'thread-loader',
+            'html-loader'
+          ]
         },
         {
           test: /\.art$/,
-          loader: 'art-template-loader',
-          options: {
-            minimize: true
-          }
+          use: [
+            'thread-loader',
+            {
+              loader: 'art-template-loader',
+              options: {
+                minimize: true
+              }
+            }
+          ]
         }
       ]
     },

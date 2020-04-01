@@ -2,15 +2,26 @@ const rm = require('rimraf')
 const cssnano = require('cssnano')
 const webpack = require('webpack')
 const safeParser = require('postcss-safe-parser')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const { resPath, baseConfig } = require('./base')
 
 const webpackConfig = Object.assign(baseConfig('production'), {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        extractComments: true,
+        parallel: true
+      })
+    ]
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `[name].min.css`
+      filename: '[name].min.css'
     }),
     new OptimizeCSSPlugin({
       assetNameRegExp: /\.css\.*(?!.*map)/g,
