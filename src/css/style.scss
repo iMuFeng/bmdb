@@ -140,6 +140,10 @@
     list-style: none;
   }
 
+  ul {
+    white-space: pre-line;
+  }
+
   li {
     display: inline-block;
     margin-right: 10px;
