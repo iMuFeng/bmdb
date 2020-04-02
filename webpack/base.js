@@ -35,7 +35,7 @@ function baseConfig (mode) {
     },
 
     externals: {
-      jQuery: 'jQuery'
+      jquery: 'jQuery'
     },
 
     module: {

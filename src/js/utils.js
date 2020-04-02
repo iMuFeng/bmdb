@@ -38,7 +38,13 @@ function object2param (obj) {
   return paramArr.join('&')
 }
 
+function isValid (arg) {
+  return !isBlank(arg)
+}
+
 export default {
+  isEmpty: isBlank,
+  isValid,
   param2object,
   object2param
 }

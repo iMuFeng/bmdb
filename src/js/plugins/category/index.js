@@ -1,5 +1,4 @@
-import $ from 'jQuery'
-import isBlank from 'is-blank'
+import $ from 'jquery'
 
 import config from '../../config'
 import containerTpl from './template/container.art'
@@ -32,7 +31,7 @@ class PluginCategory {
     return {
       href: location.href,
       origin: location.origin + location.pathname,
-      query: this.app.urlParam.param2object(location.search)
+      query: this.app.utils.param2object(location.search)
     }
   }
 
@@ -56,18 +55,18 @@ class PluginCategory {
         }
         this.render(data)
       },
-      error: (err) => {
-        console.error('[BMDB]', err)
-      }
+      error: this.errorLogger
     })
   }
 
   render (categories) {
+    const { isEmpty } = this.app.utils
+
     const defaultCategories = [
       {
         name: '全部',
         url: this.getCategoryUrl(''),
-        active: isBlank(this.app.category)
+        active: isEmpty(this.app.category)
       }
     ]
 
@@ -82,7 +81,7 @@ class PluginCategory {
     this.$list.append(categoryTpl({
       categories: [
         ...defaultCategories,
-        ...(isBlank(this.app.categoryFilters) ? categories : this.app.categoryFilters.filter(name => categories.includes(name)))
+        ...(isEmpty(this.app.categoryFilters) ? categories : this.app.categoryFilters.filter(name => categories.includes(name)))
           .map(name => {
             const url = this.getCategoryUrl(name)
             const active = name === this.app.category
@@ -98,7 +97,7 @@ class PluginCategory {
 
   getCategoryUrl (name) {
     const { origin, query } = this.location
-    return origin + '?' + this.app.urlParam.object2param({
+    return origin + '?' + this.app.utils.object2param({
       ...query,
       [this.cacheKey]: encodeURIComponent(name)
     })

@@ -4,7 +4,11 @@
       "@babel/preset-env", {
         "modules": false,
         "targets": {
-          "browsers": ["last 15 versions", "safari >= 10", "not ie < 9", "iOS >= 10"]
+          "browsers": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+          ]
         },
         "loose": true
       }
@@ -16,7 +20,7 @@
       {
         "corejs": false,
         "helpers": true,
-        "regenerator": true,
+        "regenerator": false,
         "useESModules": true
       }
     ]

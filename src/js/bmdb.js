@@ -1,10 +1,10 @@
-import $ from 'jQuery'
+import $ from 'jquery'
 import 'lazyload'
 import debounce from 'lodash/debounce'
 
 import store from './store'
 import config from './config'
-import urlParam from './urlParam'
+import utils from './utils'
 
 import pluginCategory from './plugins/category'
 
@@ -25,6 +25,9 @@ export default class Bmdb {
     cache,
     darkMode
   }) {
+    this.secret = secret
+    this.assert(utils.isValid(secret), `${secret} is not a valid secret`)
+
     this.isMovieRequest = type === 'movies'
     this.type = this.isMovieRequest ? 'movies' : 'books'
     this.apiUrl = config.API_BASE_URL + this.type
@@ -32,7 +35,6 @@ export default class Bmdb {
     this.skeletonNum = skeletonNum || 5
 
     this.page = 1
-    this.secret = secret
     this.limit = limit || 30
     this.isLoading = false
 
@@ -48,9 +50,11 @@ export default class Bmdb {
     this.darkMode = darkMode !== undefined ? !!darkMode : true
 
     this.store = store
-    this.urlParam = urlParam
+    this.utils = utils
 
     this.$container = $(selector)
+    this.assert(this.$container.length > 0, `${selector} is not a valid selector`)
+
     this.$window = $(window)
 
     this.setViews()
@@ -137,7 +141,7 @@ export default class Bmdb {
       },
       error: (err) => {
         this.isLoading = false
-        console.error('[BMDB]', err)
+        this.errorLogger(err)
       }
     })
   }
@@ -175,5 +179,15 @@ export default class Bmdb {
 
   addPlugin (plugin) {
     plugin(this)
+  }
+
+  assert (result, message) {
+    if (!result) {
+      throw new Error(message)
+    }
+  }
+
+  errorLogger (err) {
+    console.error('[BMDB]', err)
   }
 }

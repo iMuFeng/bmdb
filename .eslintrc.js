@@ -13,7 +13,7 @@ module.exports = {
   ],
   globals: {
     // jQuery
-    $: true
+    jquery: true
   },
   rules: {
     'generator-star-spacing': 'off',

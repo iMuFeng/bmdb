@@ -6,16 +6,29 @@ const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
+const pkg = require('../package.json')
 const { resPath, baseConfig } = require('./base')
+
+const banner =
+`/*!
+  * Bmdb ${pkg.version} (https://github.com/iMuFeng/bmdb)
+  * Apply for secret at https://bm.weajs.com
+  */`
 
 const webpackConfig = Object.assign(baseConfig('production'), {
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        test: /\.js(\?.*)?$/i,
         extractComments: true,
-        parallel: true
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          output: {
+            preamble: banner,
+            comments: false
+          }
+        }
       })
     ]
   },
