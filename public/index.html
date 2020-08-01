@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="referrer" content="never">
+  <meta name="referrer" content="same-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>bmdb</title>
@@ -14,11 +14,10 @@
       font-size: 16px;
       line-height: 1.7;
       color: #333;
-      -webkit-size-adjust: 100%;
     }
 
     .container {
-      width: 1000px;
+      width: 1100px;
       margin: auto
     }
 
@@ -39,17 +38,13 @@
 </head>
 <body>
   <div class="container"></div>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  <script>
+    new Bmdb({
+      type: 'movie',
+      selector: '.container',
+      darkMode: true,
+      secret: '7bf4205a0a62d00409f3cd70b0736e1a11a9a6a60f7231567f056819787b8096'
+    })
+  </script>
 </body>
-<script>
-  new Bmdb({
-    type: 'movies',
-    selector: '.container',
-    cache: true,
-    showCategories: true,
-    noMoreText: '没有更多数据了',
-    categoryFilters: ['剧情', '科幻', '动画', '喜剧'],
-    secret: '7bf4205a0a62d00409f3cd70b0736e1a11a9a6a60f7231567f056819787b8096'
-  })
-</script>
 </html>

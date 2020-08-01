@@ -1,0 +1,22 @@
+.app {
+  @each $key, $value in map-get($colors, 'light') {
+    #{compose-color-variable($key)}: #{$value};
+  }
+
+  @each $key, $value in $fonts {
+    #{compose-font-variable($key)}: #{$value};
+  }
+
+  &,
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .darkMode {
+    @each $key, $value in map-get($colors, 'dark') {
+      #{compose-color-variable($key)}: #{$value};
+    }
+  }
+}

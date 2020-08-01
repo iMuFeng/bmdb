@@ -1,7 +1,8 @@
 {
   "presets": [
     [
-      "@babel/preset-env", {
+      "@babel/preset-env",
+      {
         "modules": false,
         "targets": {
           "browsers": [
@@ -12,16 +13,30 @@
         },
         "loose": true
       }
-    ]
+    ],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
   ],
   "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-classes",
     [
       "@babel/plugin-transform-runtime",
       {
+        "absoluteRuntime": false,
         "corejs": false,
         "helpers": true,
-        "regenerator": false,
-        "useESModules": true
+        "regenerator": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": "./",
+        "alias": {
+          "@": "./src"
+        }
       }
     ]
   ]

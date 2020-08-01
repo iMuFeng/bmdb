@@ -1,0 +1,16 @@
+.list {
+  margin-bottom: 30px;
+  white-space: pre-line;
+}
+
+.link {
+  display: inline-block;
+  margin-right: 15px;
+  color: color-variant(gray);
+  text-decoration: none;
+
+  &:hover,
+  &.active {
+    color: color-variant(link);
+  }
+}
