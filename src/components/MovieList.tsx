@@ -1,12 +1,11 @@
 import { useAppOption, useHashChange, useWindowScroll } from '@/hooks'
 import { ApiQuery, fetchMovies, Movie } from '@/utils/api'
-import { classNames, hashToQuery } from '@/utils/helper'
+import { hashToQuery } from '@/utils/helper'
 import throttle from 'lodash/throttle'
 import React, { useEffect, useState } from 'react'
-import EndOfContent from '../EndOfContent'
-import MovieItem from '../MovieItem'
-import Skeleton from '../Skeleton'
-import styles from './style.scss'
+import styled from 'styled-components'
+import MovieItem from './MovieItem'
+import Skeleton from './Skeleton'
 
 const MovieList: React.FC = () => {
   const option = useAppOption()
@@ -58,20 +57,39 @@ const MovieList: React.FC = () => {
 
   return (
     <>
-      <div
-        className={classNames({
-          [styles.list]: true,
-          [styles.isMobile]: option.isMobile
-        })}
-      >
+      <ListWrapper isMobile={option.isMobile}>
         {movies.map(row => (
           <MovieItem key={row.id} item={row as any} />
         ))}
-      </div>
+      </ListWrapper>
       {pending && <Skeleton />}
-      {finished && <EndOfContent />}
+      {finished && <ListEndTips>{option.noMoreDataTips}</ListEndTips>}
     </>
   )
 }
+
+export const ListWrapper = styled.div<{
+  isMobile?: boolean
+}>`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -2%;
+  background: none;
+  line-height: 100%;
+
+  ${props =>
+    props.isMobile &&
+    `
+    & > div {
+      width: 29.33%;
+    }
+  `}
+`
+
+const ListEndTips = styled.div`
+  margin-bottom: 20px;
+  text-align: center;
+  color: ${props => props.theme.grayLight};
+`
 
 export default MovieList

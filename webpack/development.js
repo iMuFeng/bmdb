@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const portfinder = require('portfinder')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { resolve, baseConfig, basePlugins } = require('./common')
 
 const mode = 'development'
@@ -31,10 +30,7 @@ const webpackConfig = Object.assign(baseConfig(mode), {
       env: mode,
       inject: 'head'
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css'
-    })
+    new webpack.HotModuleReplacementPlugin()
   ])
 })
 

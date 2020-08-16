@@ -9,11 +9,8 @@
   <style>
     body {
       margin: 50px 0;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.7;
-      color: #333;
+      -webkit-font-smoothing: antialiased;
+      rendering: optimizeLegibility;
     }
 
     .container {
@@ -31,7 +28,7 @@
 
     @media (prefers-color-scheme: dark) {
       html {
-        background-color: #555;
+        background-color: #363636;
       }
     }
   </style>
@@ -42,8 +39,8 @@
     new Bmdb({
       type: 'movie',
       selector: '.container',
-      darkMode: true,
-      secret: '7bf4205a0a62d00409f3cd70b0736e1a11a9a6a60f7231567f056819787b8096'
+      secret: '7bf4205a0a62d00409f3cd70b0736e1a11a9a6a60f7231567f056819787b8096',
+      themeMode: 'auto'
     })
   </script>
 </body>

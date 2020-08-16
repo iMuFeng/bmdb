@@ -1,9 +1,5 @@
-const cssnano = require('cssnano')
 const webpack = require('webpack')
-const safeParser = require('postcss-safe-parser')
 const TerserPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const pkg = require('../package.json')
@@ -34,25 +30,9 @@ const webpackConfig = Object.assign(baseConfig(mode), {
     ]
   },
   plugins: basePlugins(mode).concat(
-    [
-      new MiniCssExtractPlugin({
-        filename: '[name].css'
-      }),
-
-      process.env.ANALYZER ? new BundleAnalyzerPlugin() : undefined,
-
-      new OptimizeCSSPlugin({
-        assetNameRegExp: /\.css\.*(?!.*map)/g,
-        cssProcessor: cssnano,
-        cssProcessorOptions: {
-          parser: safeParser,
-          safe: true,
-          autoprefixer: true,
-          map: false
-        },
-        canPrint: false
-      })
-    ].filter(p => p !== undefined)
+    [process.env.ANALYZER ? new BundleAnalyzerPlugin() : undefined].filter(
+      p => p !== undefined
+    )
   )
 })
 

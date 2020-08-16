@@ -1,31 +1,25 @@
 import { useAppOption, useHashChange } from '@/hooks'
 import { ApiQuery, fetchCategories } from '@/utils/api'
-import { classNames, hashToQuery } from '@/utils/helper'
+import { hashToQuery } from '@/utils/helper'
 import { isEmpty, isValid } from '@puckjs/utils/lib/helper'
 import React, { useEffect, useState } from 'react'
-import styles from './style.scss'
+import styled from 'styled-components'
 
-interface CategoryLinkProps {
+interface LinkProps {
   href: string
   title: string
   active?: boolean
 }
 
-const CategoryLink: React.FC<CategoryLinkProps> = ({ href, title, active }) => {
+const Link: React.FC<LinkProps> = ({ href, title, active }) => {
   return (
-    <a
-      href={href}
-      className={classNames({
-        [styles.link]: true,
-        [styles.active]: active
-      })}
-    >
+    <LinkWrapper href={href} active={active}>
       {title}
-    </a>
+    </LinkWrapper>
   )
 }
 
-const MovieCategoryList: React.FC = () => {
+const CategoryList: React.FC = () => {
   const option = useAppOption()
   const [query, setQuery] = useState<ApiQuery>(hashToQuery())
   const [categories, setCategories] = useState<string[]>([])
@@ -47,23 +41,40 @@ const MovieCategoryList: React.FC = () => {
   }, [])
 
   return (
-    <div className={styles.list}>
-      <CategoryLink
-        href="#"
-        title="全部"
-        active={isEmpty(query.category) && !query.starred}
-      />
-      <CategoryLink href="#starred" title="推荐" active={query.starred} />
+    <List>
+      <Link href="#" title="全部" active={isEmpty(query.category) && !query.starred} />
+      <Link href="#starred" title="推荐" active={query.starred} />
       {categories.map((row, index) => (
-        <CategoryLink
+        <Link
           key={index}
           href={`#category/${row}`}
           title={row}
           active={query.category === row}
         />
       ))}
-    </div>
+    </List>
   )
 }
 
-export default MovieCategoryList
+const List = styled.div`
+  margin-bottom: 30px;
+  white-space: pre-line;
+`
+
+const LinkWrapper = styled.a<{
+  active?: boolean
+}>`
+  display: inline-block;
+  margin-right: 15px;
+  color: ${props => props.theme.gray};
+  text-decoration: none;
+  font-size: ${props => props.theme.catFontSize};
+
+  ${props => props.active && `color: ${props.theme.link}`};
+
+  &:hover {
+    color: ${props => props.theme.link};
+  }
+`
+
+export default CategoryList

@@ -1,12 +1,19 @@
+import { Theme } from '@/theme'
 import React from 'react'
+
+interface CustomTheme {
+  light?: Theme
+  dark?: Theme
+}
 
 export interface AppOption {
   type: 'movie' | 'book'
   selector: string
   secret: string
-  darkMode?: boolean
   categories?: string[]
-  endOfContentTips?: string
+  noMoreDataTips?: string
+  themeMode?: 'light' | 'dark' | 'auto'
+  customTheme?: CustomTheme
   isMobile?: boolean
 }
 

@@ -1,14 +1,4 @@
 import { ApiQuery } from '@/utils/api'
-import { isValid } from '@puckjs/utils/lib/helper'
-
-export function classNames(args: Record<string, any>): string {
-  return Object.keys(args)
-    .filter(key => {
-      const value = args[key]
-      return isValid(value) && value
-    })
-    .join(' ')
-}
 
 export function isMobile(): boolean {
   return /iPhone|iPod|\bAndroid(?:.+)Mobile\b/i.test(window.navigator.userAgent)

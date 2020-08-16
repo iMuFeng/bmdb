@@ -1,5 +1,5 @@
-import '@/utils/global.scss'
-import { App, AppOption } from '@/components/App'
+import App from '@/components/App'
+import { AppOption } from '@/components/AppContext'
 import { importScript } from '@/utils/helper'
 import React from 'react'
 import { render } from 'react-dom'

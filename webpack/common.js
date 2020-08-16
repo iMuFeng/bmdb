@@ -1,6 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const pkg = require('../package.json')
 
 function resolve(dir) {
@@ -9,20 +8,6 @@ function resolve(dir) {
 
 function baseConfig(mode) {
   const isDev = mode === 'development'
-
-  const cssLoaders = [
-    isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-        modules: {
-          localIdentName: '[hash:base64:5]'
-        }
-      }
-    },
-    'postcss-loader'
-  ]
 
   return {
     mode,
@@ -72,25 +57,6 @@ function baseConfig(mode) {
           test: /\.(js|ts|tsx)$/,
           use: ['thread-loader', 'babel-loader'],
           include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')]
-        },
-
-        {
-          test: /\.scss$/,
-          use: [
-            ...cssLoaders,
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true,
-                prependData: '@import "~@/utils/global.scss";'
-              }
-            }
-          ]
-        },
-
-        {
-          test: /\.css$/,
-          use: cssLoaders
         }
       ]
     },
