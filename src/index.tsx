@@ -7,7 +7,7 @@ import { render } from 'react-dom'
 export default async function Bmdb(option: AppOption) {
   if (!window.fetch) {
     await importScript(
-      'https://cdn.jsdelivr.net/npm/whatwg-fetch@3.2.0/dist/fetch.umd.min.js'
+      'https://cdn.jsdelivr.net/npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js'
     )
   }
 
