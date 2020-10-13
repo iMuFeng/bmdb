@@ -15,29 +15,3 @@ export function hashToQuery(): ApiQuery {
     category: decodeURIComponent(category)
   }
 }
-
-export function importScript(src: string) {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      handleComplete()
-    }, 12e4)
-    const script = document.createElement('script')
-
-    function handleComplete(result?: any) {
-      clearTimeout(timer)
-      script.onload = null
-      script.onerror = null
-
-      if (result?.type === 'load') {
-        resolve()
-      } else {
-        reject(new Error(`Failed to load script: ${src}`))
-      }
-    }
-
-    script.src = src
-    script.onload = handleComplete
-    script.onerror = handleComplete
-    document.head.appendChild(script)
-  })
-}

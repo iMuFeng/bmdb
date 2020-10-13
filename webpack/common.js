@@ -12,7 +12,7 @@ function baseConfig(mode) {
   return {
     mode,
 
-    devtool: isDev ? 'cheap-module-eval-source-map' : 'source-map',
+    devtool: isDev ? 'cheap-module-source-map' : 'source-map',
 
     entry: {
       bmdb: './src/index.tsx'
@@ -56,7 +56,14 @@ function baseConfig(mode) {
         {
           test: /\.(js|ts|tsx)$/,
           use: ['thread-loader', 'babel-loader'],
-          include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')]
+          include: [
+            resolve('src'),
+            resolve('node_modules/webpack-dev-server/client'),
+
+            //!!! compile ES6 to ES5 in modules
+            resolve('node_modules/unfetch'),
+            resolve('node_modules/@puckjs/utils')
+          ]
         }
       ]
     },

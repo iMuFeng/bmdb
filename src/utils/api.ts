@@ -1,4 +1,4 @@
-import axios from 'redaxios'
+import request from '@/utils/request'
 
 export interface Movie {
   id: number
@@ -34,22 +34,21 @@ const getDoubanLink = (type: string, id: string) => {
   return `https://${type}.douban.com/subject/${id}`
 }
 
-export async function fetchCategories(params: ApiQuery): Promise<string[]> {
-  const result = await axios.get<string[]>(urls.category, {
-    params
+export async function fetchCategories(data: ApiQuery): Promise<string[]> {
+  return await request(urls.category, {
+    data
   })
-  return result.data
 }
 
 export async function fetchMovies(
   type: 'movie' | 'book',
-  params: ApiQuery
+  data: ApiQuery
 ): Promise<Movie[]> {
-  const result = await axios.get<Movie[]>(urls[type], {
-    params
+  const result = await request(urls[type], {
+    data
   })
 
-  return result.data.map(row => {
+  return result.map((row: any) => {
     row.rating = row.rating.includes('.') ? row.rating : `${row.rating}.0`
     row.linkUrl = getDoubanLink(type, (row as any).doubanId)
     return row
