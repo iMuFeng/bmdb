@@ -1,9 +1,8 @@
 import { useAppOption } from '@/hooks'
-import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { ListWrapper } from './MovieList'
 
-const Skeleton: React.FC = () => {
+const Skeleton = () => {
   const option = useAppOption()
   const length = option.isMobile ? 3 : 5
   const skeletons = Array.from({ length })

@@ -2,7 +2,7 @@ import { useAppOption, useHashChange } from '@/hooks'
 import { ApiQuery, fetchCategories } from '@/utils/api'
 import { hashToQuery } from '@/utils/helper'
 import { isEmpty, isValid } from '@puckjs/utils/lib/helper'
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 interface LinkProps {
@@ -11,7 +11,7 @@ interface LinkProps {
   active?: boolean
 }
 
-const Link: React.FC<LinkProps> = ({ href, title, active }) => {
+const Link: FC<LinkProps> = ({ href, title, active }) => {
   return (
     <LinkWrapper href={href} active={active}>
       {title}
@@ -19,7 +19,7 @@ const Link: React.FC<LinkProps> = ({ href, title, active }) => {
   )
 }
 
-const CategoryList: React.FC = () => {
+const CategoryList: FC = () => {
   const option = useAppOption()
   const [query, setQuery] = useState<ApiQuery>(hashToQuery())
   const [categories, setCategories] = useState<string[]>([])

@@ -6,7 +6,6 @@ import 'react-app-polyfill/stable'
 import 'unfetch/polyfill'
 import App from '@/components/App'
 import { AppOption } from '@/components/AppContext'
-import React from 'react'
 import { render } from 'react-dom'
 
 window.Bmdb = async (option: AppOption) => {

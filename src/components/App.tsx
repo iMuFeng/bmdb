@@ -1,7 +1,7 @@
 import { useTheme } from '@/hooks'
 import { darkTheme, lightTheme } from '@/theme'
 import { isMobile } from '@/utils/helper'
-import React from 'react'
+import { FC } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import AppContext, { AppOption } from './AppContext'
 import CategoryList from './CategoryList'
@@ -17,7 +17,7 @@ const defaultOption: Record<string, any> = {
   darkMode: false
 }
 
-const App: React.FC<AppProps> = ({ option: customOption }) => {
+const App: FC<AppProps> = ({ option: customOption }) => {
   const option: AppOption = {
     ...defaultOption,
     ...customOption,
