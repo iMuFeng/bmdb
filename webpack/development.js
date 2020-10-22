@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const portfinder = require('portfinder')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { resolve, baseConfig, basePlugins } = require('./common')
 
@@ -34,16 +33,4 @@ const webpackConfig = Object.assign(baseConfig(mode), {
   ])
 })
 
-module.exports = new Promise((resolve, reject) => {
-  portfinder.basePort = webpackConfig.devServer.port
-  portfinder.getPort((err, port) => {
-    if (err) {
-      reject(err)
-    } else {
-      process.env.PORT = String(port)
-      webpackConfig.devServer.port = port
-      console.log(`Your application is running at: http://127.0.0.1:${port}`)
-      resolve(webpackConfig)
-    }
-  })
-})
+module.exports = webpackConfig

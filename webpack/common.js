@@ -21,10 +21,6 @@ function baseConfig(mode) {
     output: {
       path: resolve('dist'),
       filename: isDev ? '[name].[hash].js' : `[name].js`,
-      library: 'Bmdb',
-      libraryTarget: 'umd',
-      libraryExport: 'default',
-      umdNamedDefine: true,
       publicPath: '/'
     },
 
@@ -40,7 +36,6 @@ function baseConfig(mode) {
         {
           test: /\.(js|ts|tsx)$/,
           use: [
-            'thread-loader',
             {
               loader: 'eslint-loader',
               options: {
@@ -55,7 +50,7 @@ function baseConfig(mode) {
 
         {
           test: /\.(js|ts|tsx)$/,
-          use: ['thread-loader', 'babel-loader'],
+          use: ['babel-loader'],
           include: [
             resolve('src'),
             resolve('node_modules/webpack-dev-server/client'),
@@ -66,15 +61,6 @@ function baseConfig(mode) {
           ]
         }
       ]
-    },
-
-    node: {
-      setImmediate: false,
-      dgram: 'empty',
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty'
     }
   }
 }

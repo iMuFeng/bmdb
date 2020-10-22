@@ -1,5 +1,5 @@
 import { Movie } from '@/utils/api'
-import React from 'react'
+import { FC } from 'react'
 import LazyLoad from 'react-lazy-load'
 import styled from 'styled-components'
 import StarIcon from './StarIcon'
@@ -17,7 +17,7 @@ interface StarsProps {
   rating: number
 }
 
-const Cover: React.FC<CoverProps> = ({ cover, title }) => {
+const Cover: FC<CoverProps> = ({ cover, title }) => {
   return (
     <CoverWrapper>
       <LazyLoad offsetVertical={0}>
@@ -27,7 +27,7 @@ const Cover: React.FC<CoverProps> = ({ cover, title }) => {
   )
 }
 
-const Stars: React.FC<StarsProps> = ({ rating }) => {
+const Stars: FC<StarsProps> = ({ rating }) => {
   const half = Math.round(rating / 2)
   const starred = Array.from({ length: 5 }).map((_, i) => i < half)
 
@@ -40,7 +40,7 @@ const Stars: React.FC<StarsProps> = ({ rating }) => {
   )
 }
 
-const MovieItem: React.FC<MovieItemProps> = ({ item }) => {
+const MovieItem: FC<MovieItemProps> = ({ item }) => {
   return (
     <Item>
       {/* eslint-disable-next-line react/jsx-no-target-blank */}

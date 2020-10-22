@@ -17,7 +17,6 @@ const webpackConfig = Object.assign(baseConfig(mode), {
     minimizer: [
       new TerserPlugin({
         extractComments: true,
-        cache: true,
         parallel: true,
         terserOptions: {
           output: {

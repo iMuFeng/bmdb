@@ -1,5 +1,5 @@
 import { Theme } from '@/theme'
-import React from 'react'
+import { createContext } from 'react'
 
 interface CustomTheme {
   light?: Theme
@@ -17,5 +17,5 @@ export interface AppOption {
   isMobile?: boolean
 }
 
-const AppContext = React.createContext<AppOption>({} as AppOption)
+const AppContext = createContext<AppOption>({} as AppOption)
 export default AppContext

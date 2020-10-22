@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
 interface StarIconProps {
   starred?: boolean
 }
 
-const StarIcon: React.FC<StarIconProps> = ({ starred = false }) => {
+const StarIcon: FC<StarIconProps> = ({ starred = false }) => {
   return (
     <StarIconWrapper starred={starred} viewBox="0 0 24 24" width="24" height="24">
       <path fill="none" d="M0 0h24v24H0z" />

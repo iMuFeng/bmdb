@@ -2,12 +2,12 @@ import { useAppOption, useHashChange, useWindowScroll } from '@/hooks'
 import { ApiQuery, fetchMovies, Movie } from '@/utils/api'
 import { hashToQuery } from '@/utils/helper'
 import throttle from 'lodash/throttle'
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import MovieItem from './MovieItem'
 import Skeleton from './Skeleton'
 
-const MovieList: React.FC = () => {
+const MovieList: FC = () => {
   const option = useAppOption()
   const [query, setQuery] = useState<ApiQuery>(hashToQuery())
   const [movies, setMovies] = useState<Movie[]>([])
