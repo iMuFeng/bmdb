@@ -1,6 +1,6 @@
 import { Movie } from '@/utils/api'
 import { FC } from 'react'
-import LazyLoad from 'react-lazy-load'
+import LazyLoad from 'react-lazyload'
 import styled from 'styled-components'
 import StarIcon from './StarIcon'
 
@@ -20,7 +20,7 @@ interface StarsProps {
 const Cover: FC<CoverProps> = ({ cover, title }) => {
   return (
     <CoverWrapper>
-      <LazyLoad offsetVertical={0}>
+      <LazyLoad offset={220} once={true}>
         <img src={cover} alt={title} width="150" height="220" />
       </LazyLoad>
     </CoverWrapper>
