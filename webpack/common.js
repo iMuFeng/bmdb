@@ -12,6 +12,8 @@ function baseConfig(mode) {
   return {
     mode,
 
+    target: ['web', 'es5'],
+
     devtool: isDev ? 'cheap-module-source-map' : 'source-map',
 
     entry: {
@@ -20,7 +22,11 @@ function baseConfig(mode) {
 
     output: {
       path: resolve('dist'),
-      filename: isDev ? '[name].[hash].js' : `[name].js`,
+      filename: isDev ? '[name].[contenthash].js' : '[name].js',
+      library: 'Bmdb',
+      libraryTarget: 'umd',
+      libraryExport: 'default',
+      umdNamedDefine: true,
       publicPath: '/'
     },
 
@@ -53,7 +59,6 @@ function baseConfig(mode) {
           use: ['babel-loader'],
           include: [
             resolve('src'),
-            resolve('node_modules/webpack-dev-server/client'),
 
             //!!! compile ES6 to ES5 in modules
             resolve('node_modules/unfetch'),
