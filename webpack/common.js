@@ -29,7 +29,7 @@ function baseConfig(mode, ie = false) {
 
     output: {
       path: resolve('dist'),
-      filename: isDev ? '[name].[hash].js' : `[name].js`,
+      filename: isDev ? '[name].[contenthash].js' : '[name].js',
       library: 'Bmdb',
       libraryTarget: 'umd',
       libraryExport: 'default',
@@ -66,7 +66,6 @@ function baseConfig(mode, ie = false) {
           use: ['babel-loader'],
           include: [
             resolve('src'),
-            resolve('node_modules/webpack-dev-server/client'),
 
             //!!! compile ES6 to ES5 in modules
             resolve('node_modules/unfetch'),
