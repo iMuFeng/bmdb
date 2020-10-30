@@ -6,21 +6,34 @@ function resolve(dir) {
   return path.resolve(__dirname, '..', dir)
 }
 
-function baseConfig(mode) {
+function baseConfig(mode, ie = false) {
   const isDev = mode === 'development'
+  let entry = {
+    bmdb: './src/index.tsx'
+  }
+
+  if (ie) {
+    entry = {
+      'bmdb-ie': ['@babel/polyfill', './src/index.tsx']
+    }
+  }
 
   return {
     mode,
 
+    target: ['web', 'es5'],
+
     devtool: isDev ? 'cheap-module-source-map' : 'source-map',
 
-    entry: {
-      bmdb: './src/index.tsx'
-    },
+    entry,
 
     output: {
       path: resolve('dist'),
       filename: isDev ? '[name].[hash].js' : `[name].js`,
+      library: 'Bmdb',
+      libraryTarget: 'umd',
+      libraryExport: 'default',
+      umdNamedDefine: true,
       publicPath: '/'
     },
 

@@ -1,5 +1,5 @@
 import { isValid } from '@puckjs/utils/lib/helper'
-import qs from '@puckjs/utils/lib/qs'
+import * as qs from '@puckjs/utils/lib/qs'
 
 interface RequestOptions {
   data?: any

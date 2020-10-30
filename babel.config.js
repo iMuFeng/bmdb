@@ -16,9 +16,12 @@ module.exports = {
      * Enable new JSX transform
      * https://babeljs.io/blog/2020/03/16/7.9.0#a-new-jsx-transform-11154httpsgithubcombabelbabelpull11154
      */
-    ['@babel/preset-react', {
-      runtime: 'automatic'
-    }]
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic'
+      }
+    ]
   ],
   plugins: [
     'babel-plugin-styled-components',
@@ -28,19 +31,7 @@ module.exports = {
     [
       '@babel/plugin-transform-runtime',
       {
-        absoluteRuntime: false,
-        corejs: 3,
-        helpers: true,
-        regenerator: true
-      }
-    ],
-    [
-      'module-resolver',
-      {
-        root: './',
-        alias: {
-          '@': './src'
-        }
+        corejs: 3
       }
     ]
   ]

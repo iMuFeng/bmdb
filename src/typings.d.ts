@@ -1,12 +1,7 @@
-import _React from 'react'
-import { AppOption } from './components/AppContext'
+import R from 'react'
 
 export {}
 
 declare global {
-  declare type React = _React
-
-  interface Window {
-    Bmdb(option: AppOption): Promise<void>
-  }
+  declare type React = R
 }
