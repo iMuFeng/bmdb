@@ -11,43 +11,31 @@ const banner = `/*!
 
 console.log('Building for production...\n')
 
-function build(webpackConfig) {
-  return new Promise((resolve, reject) => {
-    webpack(webpackConfig, (err, stats) => {
-      if (err) {
-        return reject(err)
-      } else {
-        process.stdout.write(stats.toString())
-      }
-    })
-  })
-}
+const webpackConfig = Object.assign(baseConfig(mode), {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: true,
+        parallel: true,
+        terserOptions: {
+          output: {
+            preamble: banner,
+            comments: false
+          },
+          safari10: true
+        }
+      })
+    ]
+  },
+  plugins: basePlugins(mode)
+})
 
-const bp = [false, true].map(ie =>
-  build(
-    Object.assign(baseConfig(mode, ie), {
-      optimization: {
-        minimize: true,
-        minimizer: [
-          new TerserPlugin({
-            extractComments: true,
-            parallel: true,
-            terserOptions: {
-              output: {
-                preamble: banner,
-                comments: false
-              },
-              safari10: true
-            }
-          })
-        ]
-      },
-      plugins: basePlugins(mode)
-    })
-  )
-)
-
-Promise.all(bp).catch(err => {
-  console.error(err)
-  process.exit(1)
+webpack(webpackConfig, (err, stats) => {
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  } else {
+    process.stdout.write(stats.toString())
+  }
 })

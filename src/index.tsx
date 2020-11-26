@@ -6,6 +6,6 @@ import App from '@/components/App'
 import { AppOption } from '@/components/AppContext'
 import { render } from 'react-dom'
 
-export default async function Bmdb(option: AppOption) {
+export default function Bmdb(option: AppOption) {
   render(<App option={option} />, document.querySelector(option.selector))
 }

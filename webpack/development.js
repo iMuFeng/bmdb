@@ -4,6 +4,10 @@ const { resolve, baseConfig, basePlugins } = require('./common')
 
 const mode = 'development'
 const webpackConfig = Object.assign(baseConfig(mode), {
+  entry: {
+    bmdb: './public/index.js'
+  },
+
   devServer: {
     clientLogLevel: 'warning',
     hot: true,
@@ -27,7 +31,7 @@ const webpackConfig = Object.assign(baseConfig(mode), {
       template: resolve('public/index.html'),
       chunks: ['bmdb'],
       env: mode,
-      inject: 'head'
+      inject: 'footer'
     }),
     new webpack.HotModuleReplacementPlugin()
   ])

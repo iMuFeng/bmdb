@@ -6,17 +6,8 @@ function resolve(dir) {
   return path.resolve(__dirname, '..', dir)
 }
 
-function baseConfig(mode, ie = false) {
+function baseConfig(mode) {
   const isDev = mode === 'development'
-  let entry = {
-    bmdb: './src/index.tsx'
-  }
-
-  if (ie) {
-    entry = {
-      'bmdb-ie': ['@babel/polyfill', './src/index.tsx']
-    }
-  }
 
   return {
     mode,
@@ -25,7 +16,9 @@ function baseConfig(mode, ie = false) {
 
     devtool: isDev ? 'cheap-module-source-map' : 'source-map',
 
-    entry,
+    entry: {
+      bmdb: './src/index.tsx'
+    },
 
     output: {
       path: resolve('dist'),
