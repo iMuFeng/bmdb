@@ -20,12 +20,6 @@
 </head>
 ```
 
-如果想支持 IE 11 或者比较旧的浏览器：
-
-```html
-<script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@3.1.0/dist/bmdb-ie.js" />
-```
-
 ### 3. 初始化参数
 
 | 参数名 | 必选 | 类型   | 默认值 | 说明         |
