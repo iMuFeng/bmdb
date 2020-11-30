@@ -18,6 +18,8 @@ const request = (url: string, customOptions?: RequestOptions): Promise<any> => {
     ...customOptions
   }
 
+  let controller: any
+
   const requestInit: any = {
     method: 'GET',
     headers: {
@@ -25,6 +27,11 @@ const request = (url: string, customOptions?: RequestOptions): Promise<any> => {
       ...customOptions?.headers
     },
     credentials: 'same-origin'
+  }
+
+  if (window.AbortController) {
+    controller = new AbortController()
+    requestInit.signal = controller.signal
   }
 
   if (isValid(customOptions?.data)) {
@@ -35,6 +42,11 @@ const request = (url: string, customOptions?: RequestOptions): Promise<any> => {
   const fp = window.fetch(url, requestInit).then(response => response.json())
   const tp = new Promise((resolve, reject) => {
     setTimeout(() => {
+      // Cancel fetch when timeout
+      if (controller) {
+        controller.abort()
+      }
+
       reject(new Error('request timeout'))
     }, options.timeout)
   })
