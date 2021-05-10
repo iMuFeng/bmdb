@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@puckjs/utils": "^3.1.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "react": "^17.0.0",
     "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.0",
