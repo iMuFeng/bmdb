@@ -1,5 +1,5 @@
 import { useAppOption, useHashChange, useWindowScroll } from '@/hooks'
-import { ApiQuery, fetchMovies, Movie } from '@/utils/api'
+import { ApiQuery, fetchList, Movie } from '@/utils/api'
 import { hashToQuery } from '@/utils/helper'
 import throttle from 'lodash/throttle'
 import { FC, useEffect, useState } from 'react'
@@ -17,7 +17,7 @@ const MovieList: FC = () => {
   useEffect(() => {
     setPending(true)
 
-    fetchMovies(option.type, {
+    fetchList(option.type, {
       secret: option.secret,
       ...query
     })

@@ -23,14 +23,14 @@ export interface ApiQuery {
   category?: string
 }
 
-const baseURL = 'https://bm.weajs.com/api'
+const baseURL = 'https://api.weajs.com/v1'
 const urls: Record<string, string | any> = {
   movie: `${baseURL}/movies`,
   book: `${baseURL}/books`,
   category: `${baseURL}/movies/categories`
 }
 
-const getDoubanLink = (type: string, id: string) => {
+const getDoubanLink = (type: 'movie' | 'book', id: string) => {
   return `https://${type}.douban.com/subject/${id}`
 }
 
@@ -40,7 +40,7 @@ export async function fetchCategories(data: ApiQuery): Promise<string[]> {
   })
 }
 
-export async function fetchMovies(
+export async function fetchList(
   type: 'movie' | 'book',
   data: ApiQuery
 ): Promise<Movie[]> {
