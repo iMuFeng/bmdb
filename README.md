@@ -16,7 +16,7 @@
 
 ```html
 <head>
-  <script src="https://cdn.jsdelivr.net/gh/iMuFeng/bmdb@3.1.0/dist/bmdb.js" />
+  <script src="https://cdn.jsdelivr.net/combine/npm/react@17.0.2/umd/react.production.min.js,npm/react-dom@17.0.2/umd/react-dom.production.min.js, gh/iMuFeng/bmdb@3.1.0/dist/bmdb.js""></script>
 </head>
 ```
 

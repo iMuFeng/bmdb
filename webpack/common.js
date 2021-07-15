@@ -20,6 +20,11 @@ function baseConfig(mode) {
       bmdb: './src/index.tsx'
     },
 
+    externals: {
+      react: 'React',
+      'react-dom': 'ReactDOM'
+    },
+
     output: {
       path: resolve('dist'),
       filename: isDev ? '[name].[contenthash].js' : '[name].js',
