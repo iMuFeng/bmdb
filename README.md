@@ -16,7 +16,7 @@
 
 ```html
 <head>
-  <script src="https://cdn.jsdelivr.net/combine/npm/react@17.0.2/umd/react.production.min.js,npm/react-dom@17.0.2/umd/react-dom.production.min.js, gh/iMuFeng/bmdb@3.1.0/dist/bmdb.js""></script>
+  <script src="https://cdn.jsdelivr.net/combine/npm/react@17.0.2/umd/react.production.min.js,npm/react-dom@17.0.2/umd/react-dom.production.min.js,gh/iMuFeng/bmdb@3.4.0/dist/bmdb.js""></script>
 </head>
 ```
 
@@ -28,7 +28,7 @@
 | selector | ✅   | string | 无 | 外层选择器 |
 | secret | ✅   | string | 无 | API 密钥 |
 | categories | 否 | string[] | 无 | 展示的分类名称，默认展示所有分类 |
-| noMoreDataTips |  否   | string | `No more results` | 所有数据加载完成提示语 |
+| noMoreDataTips |  否   | string | `You've reached the end of the list.` | 所有数据加载完成提示语 |
 | themeMode |  否   | string | `auto` | `light`, `dark` 或 `auto` |
 | customTheme | 否 | { light: [Theme](https://github.com/iMuFeng/bmdb/blob/master/src/theme.ts#L21), dark: [Theme](https://github.com/iMuFeng/bmdb/blob/master/src/theme.ts#L21) } | 无 | 自定义主题 |
 

@@ -13,7 +13,7 @@ interface AppProps {
 
 const defaultOption: Record<string, any> = {
   categories: [],
-  noMoreDataTips: 'No more results',
+  noMoreDataTips: "You've reached the end of the list.",
   darkMode: false
 }
 
