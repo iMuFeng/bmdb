@@ -11,17 +11,19 @@ interface MovieItemProps {
 interface CoverProps {
   cover: string
   title: string
+  tvShow?: boolean
 }
 
 interface StarsProps {
   rating: number
 }
 
-const Cover: FC<CoverProps> = ({ cover, title }) => {
+const Cover: FC<CoverProps> = ({ cover, title, tvShow = false }) => {
   return (
     <CoverWrapper>
       <LazyLoad offset={220} once={true}>
         <img src={cover} alt={title} width="150" height="220" />
+        {tvShow && <TvShow>剧集</TvShow>}
       </LazyLoad>
     </CoverWrapper>
   )
@@ -45,7 +47,7 @@ const MovieItem: FC<MovieItemProps> = ({ item }) => {
     <Item>
       {/* eslint-disable-next-line react/jsx-no-target-blank */}
       <a href={item.linkUrl} target="_blank">
-        <Cover cover={item.cover} title={item.title} />
+        <Cover cover={item.cover} title={item.title} tvShow={item.tvShow} />
         <Title>{item.title}</Title>
         <Rating>
           <Stars rating={Number(item.rating)} />
@@ -84,6 +86,19 @@ const CoverWrapper = styled.div`
   &:hover {
     box-shadow: 0 1rem 2.1rem rgba(48, 55, 66, 0.3);
   }
+`
+
+const TvShow = styled.span`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9;
 `
 
 const StarsWrapper = styled.span`

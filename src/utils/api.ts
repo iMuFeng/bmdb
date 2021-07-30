@@ -13,6 +13,7 @@ export interface Movie {
   pubdate?: string
   linkUrl: string
   starred?: boolean
+  tvShow?: boolean
   createdAt: string
 }
 
